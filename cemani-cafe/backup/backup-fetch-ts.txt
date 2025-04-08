@@ -1,0 +1,11 @@
+export const fetchAPI = async (url: string, Options: RequestInit) => {
+    const response = await fetch(url, {
+        headers: {
+            'Content-Type' : 'application/json',
+        },
+        ...Options,
+    });
+    const data = await response.json();
+    return data;
+};
+
