@@ -1,12 +1,13 @@
 import { FormEvent } from 'react';
-import Button from '../../../ui/Button';
-import Input from '../../../ui/Input';
+import Button from '../../ui/Button';
+import Input from '../../ui/Input';
 import styles from './Login.module.css';
-import { login } from '../../../../services/auth.service';
-import { setLocalstorage } from '../../../../utils/storage';
-import { Navigate } from 'react-router-dom';
+import { login } from '../../../services/auth.service';
+import { setLocalstorage } from '../../../utils/storage';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate  = useNavigate();
     const handleLogin = async (event: FormEvent) => {
         event.preventDefault();
         const form = event.target as HTMLFormElement;
@@ -17,7 +18,7 @@ const Login = () => {
         const result = await login(payload);
         setLocalstorage('auth', result.token);  
 
-        return <Navigate to ='/orders' replace/>
+        return navigate('/orders');
     }; 
   return (
     <main className={styles.login}>
